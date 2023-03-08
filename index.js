@@ -8,6 +8,10 @@ const manager = require('.lib/manager.js');
 const engineer = require('./lib/engineer.js');
 const intern = require('.lib/intern.js');
 
+function init() {
+
+}
+
 function addManager() {
     inquirer.prompt ([
         {
@@ -94,3 +98,5 @@ function addIntern() {
         teamArray.push(intern);
     });
 }
+
+init();
