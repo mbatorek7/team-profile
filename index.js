@@ -4,13 +4,11 @@ const inquirer = require('inquirer');
 
 const teamArray = [];
 
-const manager = require('.lib/manager.js');
+const employee = require('./lib/employee.js')
+const manager = require('./lib/manager.js');
 const engineer = require('./lib/engineer.js');
-const intern = require('.lib/intern.js');
-
-function init() {
-
-}
+const intern = require('./lib/intern.js');
+const generateHTML = require('./src/generateHTML.js');
 
 function addManager() {
     inquirer.prompt ([
@@ -97,6 +95,44 @@ function addIntern() {
         const intern = new Intern(answers.internName, answers.internId, answers.internEmail, answers.internSchool);
         teamArray.push(intern);
     });
+}
+
+function writeToFile(data) {
+    fs.writeFile('./dist/index.html', data, err => {
+        if(err) {
+            console.log(err);
+            return;
+        } else {
+            console.log("Team profile has been created!");
+        }
+    })
+}
+
+function init() {
+    inquirer.prompt([
+        {
+            type: 'list',
+            name: 'employeeType',
+            message: 'Which employee would you like to add?',
+            choices: ['Manager', 'Engineer', 'Intern', 'none']
+        }
+    ])
+    .then(function(userInput) {
+        switch(userInput.employeeType) {
+            case 'Manager':
+                addManager();
+                break;
+            case 'Engineer':
+                addEngineer();
+                break;
+            case 'Intern':
+                addIntern();
+                break;
+            case 'none':
+                writeToFile(generateHTML(teamArray));
+                break;
+        }
+    }) 
 }
 
 init();
