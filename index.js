@@ -4,10 +4,10 @@ const inquirer = require('inquirer');
 
 const teamArray = [];
 
-const employee = require('./lib/employee.js')
-const manager = require('./lib/manager.js');
-const engineer = require('./lib/engineer.js');
-const intern = require('./lib/intern.js');
+const Employee = require('./lib/employee.js')
+const Manager = require('./lib/manager.js');
+const Engineer = require('./lib/engineer.js');
+const Intern = require('./lib/intern.js');
 const generateHTML = require('./src/generateHTML.js');
 
 function addManager() {
@@ -32,10 +32,25 @@ function addManager() {
             name: 'managerOfficeNumber',
             message: "What is the manager's office number?"
         },
+        {
+            type: 'list',
+            name: 'addAnotherEmployee',
+            message: 'Do you want to add another employee?',
+            choices: ['Yes', 'No']
+        }
     ])
     .then(answers => {
         const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.managerOfficeNumber);
         teamArray.push(manager);
+
+        switch(answers.addAnotherEmployee) {
+            case 'Yes':
+                init();
+                break;
+            case 'No':
+                writeToFile(generateHTML(teamArray));
+                break;
+        }
     });
 }
 
@@ -61,10 +76,25 @@ function addEngineer() {
             name: 'engineerGithub',
             message: "What is the engineer's Github username?"
         },
+        {
+            type: 'list',
+            name: 'addAnotherEmployee',
+            message: 'Do you want to add another employee?',
+            choices: ['Yes', 'No']
+        }
     ])
     .then(answers => {
         const engineer = new Engineer(answers.engineerName, answers.engineerId, answers.engineerEmail, answers.engineerGithub);
         teamArray.push(engineer);
+
+        switch(answers.addAnotherEmployee) {
+            case 'Yes':
+                init();
+                break;
+            case 'No':
+                writeToFile(generateHTML(teamArray));
+                break;
+        }
     });
 }
 
@@ -90,10 +120,26 @@ function addIntern() {
             name: 'internSchool',
             message: "What is the intern's school name?"
         },
+        {
+            type: 'list',
+            name: 'addAnotherEmployee',
+            message: 'Do you want to add another employee?',
+            choices: ['Yes', 'No']
+        }
     ])
     .then(answers => {
         const intern = new Intern(answers.internName, answers.internId, answers.internEmail, answers.internSchool);
         teamArray.push(intern);
+
+        switch(answers.addAnotherEmployee) {
+            case 'Yes':
+                init();
+                break;
+            case 'No':
+                writeToFile(generateHTML(teamArray));
+                break;
+        }
+
     });
 }
 
@@ -113,7 +159,7 @@ function init() {
         {
             type: 'list',
             name: 'employeeType',
-            message: 'Which employee would you like to add?',
+            message: 'Which employee type would you like to add?',
             choices: ['Manager', 'Engineer', 'Intern', 'none']
         }
     ])
