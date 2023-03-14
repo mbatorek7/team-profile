@@ -44,7 +44,7 @@ function addManager() {
         }
     ])
     .then(answers => {
-        const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.managerOfficeNumber);
+        const manager = new Manager(answers.managerId, answers.managerName, answers.managerEmail, answers.managerOfficeNumber);
         teamArray.push(manager);
 
         //does user want to enter new employee
@@ -91,7 +91,7 @@ function addEngineer() {
         }
     ])
     .then(answers => {
-        const engineer = new Engineer(answers.engineerName, answers.engineerId, answers.engineerEmail, answers.engineerGithub);
+        const engineer = new Engineer(answers.engineerId, answers.engineerName, answers.engineerEmail, answers.engineerGithub);
         teamArray.push(engineer);
 
         //does user want to enter new employee
@@ -138,7 +138,7 @@ function addIntern() {
         }
     ])
     .then(answers => {
-        const intern = new Intern(answers.internName, answers.internId, answers.internEmail, answers.internSchool);
+        const intern = new Intern(answers.internId, answers.internName, answers.internEmail, answers.internSchool);
         teamArray.push(intern);
 
         //does user want to enter new employee
