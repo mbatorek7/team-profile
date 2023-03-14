@@ -1,3 +1,4 @@
+//import class
 const employee = require('../lib/employee');
 
 describe('employee', () => {

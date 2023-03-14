@@ -1,13 +1,7 @@
-const Employee = require('../lib/employee')
-const Manager = require('../lib/manager');
-const Engineer = require('../lib/engineer');
-const Intern = require('../lib/intern');
-
 function renderManagerCard(manager) {
-    console.log(manager)
     return `
         <div class="card" style="width: 18rem;">
-            <img src="./assets/images/manager.png" class="card-img-top" alt="...">
+            <img src="../assets/images/manager.png" class="card-img-top" alt="...">
             <div class="card-body">
                 <h4 class="card-title">${manager.getName()}</h4>
                 <h5>${manager.getEmployeeType()}</h5>
@@ -23,7 +17,7 @@ function renderManagerCard(manager) {
 function renderEngineerCard(engineer) {
     return `
         <div class="card" style="width: 18rem;">
-            <img src="./assets/images/engineer.jpg" class="card-img-top" alt="...">
+            <img src="../assets/images/engineer.jpg" class="card-img-top" alt="...">
             <div class="card-body">
                 <h4 class="card-title">${engineer.getName()}</h4>
                 <h5>${engineer.getEmployeeType()}</h5>
@@ -39,7 +33,7 @@ function renderEngineerCard(engineer) {
 function renderInternCard(intern) {
     return `
         <div class="card" style="width: 18rem;">
-            <img src="./assets/images/intern.jpg" class="card-img-top" alt="...">
+            <img src="../assets/images/intern.jpg" class="card-img-top" alt="...">
             <div class="card-body">
                 <h4 class="card-title">${intern.getName()}</h4>
                 <h5>${intern.getEmployeeType()}</h5>
@@ -52,7 +46,22 @@ function renderInternCard(intern) {
     `;
 }
 
-function generateHTML(data) {
+function generateHTML(dataArray) {
+    //sort thru array to find employee types and generate their HTML
+    const HTMLArray = dataArray.map(element => {
+        const role = element.getEmployeeType();
+        if(role == 'Manager') {
+            return renderManagerCard(element);
+        } else if (role == 'Engineer') {
+            return renderEngineerCard(element);
+        } else if (role == 'Intern') {
+            return renderInternCard(element);
+        }
+    });
+
+    //join all HTML cards into one
+    const finalHTML = HTMLArray.join("");
+    
     return `
     <!DOCTYPE html>
     <html lang="en">
@@ -78,9 +87,7 @@ function generateHTML(data) {
     
             <div class="container">
                 <div class="row"> 
-                    ${renderManagerCard(data.manager)}
-                    ${renderEngineerCard(data.engineer)}
-                    ${renderInternCard(data.intern)}
+                    ${finalHTML}
                 </div>
             </div>
     

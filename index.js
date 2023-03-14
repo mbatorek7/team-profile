@@ -2,14 +2,18 @@
 const fs = require('fs'); 
 const inquirer = require('inquirer');
 
+//create empty array for all employees
 const teamArray = [];
 
+//import classes and other files
 const Employee = require('./lib/employee.js')
 const Manager = require('./lib/manager.js');
 const Engineer = require('./lib/engineer.js');
 const Intern = require('./lib/intern.js');
 const generateHTML = require('./src/generateHTML.js');
 
+
+//questions for manager type
 function addManager() {
     inquirer.prompt ([
         {
@@ -43,6 +47,8 @@ function addManager() {
         const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.managerOfficeNumber);
         teamArray.push(manager);
 
+        //does user want to enter new employee
+        //if not, then generate HTML file
         switch(answers.addAnotherEmployee) {
             case 'Yes':
                 init();
@@ -54,6 +60,7 @@ function addManager() {
     });
 }
 
+//questions for engineer type
 function addEngineer() {
     inquirer.prompt ([
         {
@@ -87,6 +94,8 @@ function addEngineer() {
         const engineer = new Engineer(answers.engineerName, answers.engineerId, answers.engineerEmail, answers.engineerGithub);
         teamArray.push(engineer);
 
+        //does user want to enter new employee
+        //if not, then generate HTML file
         switch(answers.addAnotherEmployee) {
             case 'Yes':
                 init();
@@ -98,6 +107,7 @@ function addEngineer() {
     });
 }
 
+//questions for intern type
 function addIntern() {
     inquirer.prompt ([
         {
@@ -131,6 +141,8 @@ function addIntern() {
         const intern = new Intern(answers.internName, answers.internId, answers.internEmail, answers.internSchool);
         teamArray.push(intern);
 
+        //does user want to enter new employee
+        //if not, then generate HTML file
         switch(answers.addAnotherEmployee) {
             case 'Yes':
                 init();
@@ -143,17 +155,19 @@ function addIntern() {
     });
 }
 
+//create HTML file in dist folder
 function writeToFile(data) {
     fs.writeFile('./dist/index.html', data, err => {
-        if(err) {
+        if(err) {//if error then show error
             console.log(err);
             return;
-        } else {
+        } else {//otherwise profile has been created
             console.log("Team profile has been created!");
         }
     })
 }
 
+//start off asking user which employee they want to add
 function init() {
     inquirer.prompt([
         {
@@ -163,6 +177,7 @@ function init() {
             choices: ['Manager', 'Engineer', 'Intern', 'none']
         }
     ])
+    //call functions depending on which type is chosen
     .then(function(userInput) {
         switch(userInput.employeeType) {
             case 'Manager':
@@ -181,4 +196,5 @@ function init() {
     }) 
 }
 
+//initialize program
 init();

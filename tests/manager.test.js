@@ -1,3 +1,4 @@
+//import class
 const Manager = require('../lib/manager');
 
 describe('manager', () => {

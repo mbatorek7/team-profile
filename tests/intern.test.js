@@ -1,3 +1,4 @@
+//import class
 const Intern = require('../lib/intern');
 
 describe('intern', () => {

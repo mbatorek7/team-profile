@@ -26,3 +26,32 @@ THEN I am prompted to enter the intern’s name, ID, email, and school, and I am
 WHEN I decide to finish building my team
 THEN I exit the application, and the HTML is generated
 ```
+
+## Description
+With this repo, the user can easily create a team profile that can consist of manager(s), engineer(s), and intern(s). The web app created will displayed all necessary information and allow the user to email any employee that it chooses with the press of a button.
+
+<p align="center">
+    <a href="https://github.com/mbatorek7/hw10-team-profile"><img src="https://img.shields.io/badge/-See Live Site-success?style=for-the-badge"  alt="GitHub Repo" ></a>
+</p>
+
+## Screenshots
+
+Here is what the final product looks like and how to use it:
+![Final product.](./assets/images/final-product.gif)
+
+## Installation
+To clone this repo:
+
+git clone git@github.com:mbatorek7/hw10-team-profile.git
+
+## License
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+## Tests
+To run the tests, open new terminal and type:
+
+npm test
+
+  ## Questions?
+  - Github Profile: [https://github.com/mbatorek7](https://github.com/mbatorek7)
+  - Email: [maegan.batorek@valpo.edu](maegan.batorek@valpo.edu)
